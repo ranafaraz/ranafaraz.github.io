@@ -73,7 +73,7 @@ export default function Contact() {
               </a>
             </div>
 
-            <p className="mt-8 inline-flex items-center gap-2 text-sm text-slate-500">
+            <p className="mt-8 inline-flex items-center gap-2 text-sm text-slate-400">
               <IconArrowRight width={14} height={14} className="text-cyan" />
               Remote · {identity.location} · Available worldwide
             </p>

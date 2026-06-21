@@ -113,6 +113,55 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/*
+ * Light theme remap. The components are authored dark-first (text-white, dark
+ * panels). Rather than thread `dark:` variants through every element, we remap
+ * the dark-assuming utilities to AA-contrast light values. Scoped to `.grain`
+ * (the main content wrapper) so the dark loader splash is unaffected.
+ */
+html:not(.dark) .grain .text-white {
+  color: #0f172a;
+}
+html:not(.dark) .grain .text-slate-200 {
+  color: #1e293b;
+}
+html:not(.dark) .grain .text-slate-300 {
+  color: #334155;
+}
+html:not(.dark) .grain .text-slate-400 {
+  color: #475569;
+}
+html:not(.dark) .grain .text-slate-500,
+html:not(.dark) .grain .text-slate-600 {
+  color: #475569;
+}
+/* Brand accent darkened for contrast on light surfaces (AA). */
+html:not(.dark) .grain .text-cyan {
+  color: #0e7490;
+}
+html:not(.dark) .grain .bg-panel\/60,
+html:not(.dark) .grain .bg-panel\/95 {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+html:not(.dark) .grain .bg-white\/5,
+html:not(.dark) .grain .bg-white\/\[0\.02\],
+html:not(.dark) .grain .bg-white\/\[0\.03\] {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+html:not(.dark) .grain .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.06);
+}
+html:not(.dark) .grain .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.12);
+}
+html:not(.dark) .grain .border-white\/20 {
+  border-color: rgba(15, 23, 42, 0.18);
+}
+/* Footer/contact dividers sit on light bg now. */
+html:not(.dark) .grain .border-t {
+  border-top-color: rgba(15, 23, 42, 0.12);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

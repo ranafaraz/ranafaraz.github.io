@@ -174,7 +174,7 @@ export default function Hero() {
         <a
           href="#about"
           aria-label="Scroll to about"
-          className="flex flex-col items-center gap-2 text-xs uppercase tracking-widest text-slate-500 transition-colors hover:text-cyan"
+          className="flex flex-col items-center gap-2 text-xs uppercase tracking-widest text-slate-400 transition-colors hover:text-cyan"
         >
           Scroll
           <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/20 p-1">

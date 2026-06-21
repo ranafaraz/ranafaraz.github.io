@@ -77,10 +77,9 @@ You can also trigger it manually from the **Actions** tab (workflow_dispatch).
 These are intentionally left for you to provide; the site degrades gracefully
 without them:
 
-- [ ] **`/public/profile.jpg`** — your headshot (portrait, ~800×1000). Until
-      added, the About card shows a tasteful gradient with your name.
+- [x] **`/public/profile.jpg`** — headshot added.
 - [ ] **`/public/Rana_Faraz_Ahmed_CV.pdf`** — your CV. The "Download CV"
-      buttons link here.
+      buttons link here (they 404 until this file is added).
 - [ ] *(optional)* Re-run `npm run generate:og` if you tweak hero copy so the
       social preview stays in sync.
 

@@ -40,7 +40,6 @@ export default function About() {
               </div>
             </div>
           </div>
-          {/* TODO: add real headshot at /public/profile.jpg */}
         </Reveal>
 
         <div>

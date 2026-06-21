@@ -12,11 +12,11 @@ export default function Footer() {
           >
             Rana Faraz Ahmed<span className="text-cyan">.</span>
           </a>
-          <p className="mt-2 max-w-sm text-sm text-slate-500">
+          <p className="mt-2 max-w-sm text-sm text-slate-400">
             Built with React, Vite, Three.js, Tailwind CSS, GSAP &amp; Framer
             Motion. Deployed on GitHub Pages.
           </p>
-          <p className="mt-1 text-xs text-slate-600">
+          <p className="mt-1 text-xs text-slate-400">
             © {new Date().getFullYear()} Rana Faraz Ahmed. All rights reserved.
           </p>
         </div>

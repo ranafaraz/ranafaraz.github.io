@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { AnimatePresence, motion } from 'framer-motion';
 import { projects, type Project } from '../data/profile';
@@ -112,13 +112,44 @@ function Modal({
   project: Project;
   onClose: () => void;
 }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    // Remember what was focused so we can restore it on close (WCAG 2.4.3).
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      // Trap Tab focus inside the dialog.
+      if (e.key === 'Tab' && panelRef.current) {
+        const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
+    // Move focus into the dialog on open.
+    panelRef.current?.focus();
+
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
+      previouslyFocused?.focus?.();
     };
   }, [onClose]);
 
@@ -134,7 +165,9 @@ function Modal({
       aria-label={project.title}
     >
       <motion.div
-        className="glass relative w-full max-w-2xl overflow-hidden rounded-t-3xl bg-panel/95 p-7 sm:rounded-3xl"
+        ref={panelRef}
+        tabIndex={-1}
+        className="glass relative w-full max-w-2xl overflow-hidden rounded-t-3xl bg-panel/95 p-7 outline-none sm:rounded-3xl"
         initial={{ y: 40, opacity: 0, scale: 0.98 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         exit={{ y: 40, opacity: 0, scale: 0.98 }}
