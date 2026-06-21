@@ -8,6 +8,8 @@ type Props = {
   variant?: 'primary' | 'ghost';
   className?: string;
   download?: boolean;
+  target?: string;
+  rel?: string;
   ariaLabel?: string;
   cursorLabel?: string;
 };
@@ -23,6 +25,8 @@ export default function MagneticButton({
   variant = 'primary',
   className = '',
   download,
+  target,
+  rel,
   ariaLabel,
   cursorLabel,
 }: Props) {
@@ -50,6 +54,8 @@ export default function MagneticButton({
         ref={ref}
         href={href}
         download={download}
+        target={target}
+        rel={rel}
         aria-label={ariaLabel}
         className={cls}
         onMouseMove={handleMove}

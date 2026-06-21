@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { AnimatePresence, motion } from 'framer-motion';
-import { projects, type Project } from '../data/profile';
+import {
+  projects,
+  projectCategories,
+  type Project,
+  type ProjectCategory,
+} from '../data/profile';
 import SectionHeading from '../components/SectionHeading';
 import Reveal from '../components/Reveal';
 import { IconArrowRight } from '../components/Icons';
@@ -60,7 +65,17 @@ function ProjectCard({
             height={18}
           />
         </div>
-        <h3 className="mt-4 font-display text-xl font-semibold text-white">
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {project.categories.map((c) => (
+            <span
+              key={c}
+              className="rounded-full border border-cyan/25 bg-cyan/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-cyan"
+            >
+              {c}
+            </span>
+          ))}
+        </div>
+        <h3 className="mt-2 font-display text-xl font-semibold text-white">
           {project.title}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-slate-400">
@@ -185,9 +200,19 @@ function Modal({
         >
           ✕
         </button>
-        <span className={`font-mono text-xs ${ACCENT[project.accent]}`}>
-          Case study
-        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className={`font-mono text-xs ${ACCENT[project.accent]}`}>
+            Case study
+          </span>
+          {project.categories.map((c) => (
+            <span
+              key={c}
+              className="rounded-full border border-cyan/25 bg-cyan/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-cyan"
+            >
+              {c}
+            </span>
+          ))}
+        </div>
         <h3 className="mt-2 font-display text-2xl font-bold text-white">
           {project.title}
         </h3>
@@ -207,35 +232,117 @@ function Modal({
           ))}
         </dl>
 
-        <div className="mt-6 flex flex-wrap gap-1.5 border-t border-white/10 pt-5">
+        <div className="mt-6 flex flex-wrap items-center gap-1.5 border-t border-white/10 pt-5">
           {project.stack.map((s) => (
             <Chip key={s}>{s}</Chip>
           ))}
         </div>
+
+        {project.link &&
+          (project.link.todo ? (
+            // DOI not yet available — show a disabled, labeled slot.
+            <span
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-slate-500"
+              title="Link coming soon"
+            >
+              {project.link.label}
+              <span className="text-[10px] uppercase tracking-wide">
+                (link TODO)
+              </span>
+            </span>
+          ) : (
+            <a
+              href={project.link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost mt-4 px-4 py-2 text-sm"
+              data-cursor="open"
+            >
+              {project.link.label}
+              <IconArrowRight width={16} height={16} />
+            </a>
+          ))}
       </motion.div>
     </motion.div>
   );
 }
 
+type Filter = 'All' | ProjectCategory;
+
 export default function Projects() {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [filter, setFilter] = useState<Filter>('All');
   const open = projects.find((p) => p.id === openId) ?? null;
+
+  const filters: Filter[] = ['All', ...projectCategories];
+  const visible =
+    filter === 'All'
+      ? projects
+      : projects.filter((p) => p.categories.includes(filter));
 
   return (
     <section id="projects" className="section scroll-mt-24">
       <SectionHeading
         eyebrow="Projects"
-        title="Selected work — from RAG to real-time voice"
-        subtitle="Real systems shipped in EdTech, FinTech and enterprise. Click any card for the problem, approach and result."
+        title="Selected work — AI, FinTech, Blockchain & Research"
+        subtitle="Real systems shipped across EdTech, FinTech, enterprise and peer-reviewed research. Filter by category, then click any card for the problem, approach and result."
       />
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p, i) => (
-          <Reveal key={p.id} delay={(i % 3) * 0.08} className="h-full">
-            <ProjectCard project={p} onOpen={() => setOpenId(p.id)} />
-          </Reveal>
-        ))}
-      </div>
+      {/* Category filter bar */}
+      <Reveal className="mb-10">
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
+          {filters.map((f) => {
+            const active = filter === f;
+            const count =
+              f === 'All'
+                ? projects.length
+                : projects.filter((p) => p.categories.includes(f)).length;
+            return (
+              <button
+                key={f}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setFilter(f)}
+                className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                  active
+                    ? 'border-cyan/50 bg-cyan/10 text-cyan'
+                    : 'border-white/10 text-slate-400 hover:border-cyan/30 hover:text-white'
+                }`}
+              >
+                {f}
+                <span className="ml-1.5 text-xs opacity-60">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      </Reveal>
+
+      <motion.div
+        layout
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        <AnimatePresence mode="popLayout">
+          {visible.map((p) => (
+            <motion.div
+              key={p.id}
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="h-full"
+            >
+              <ProjectCard project={p} onOpen={() => setOpenId(p.id)} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {visible.length === 0 && (
+        <p className="mt-8 text-center text-sm text-slate-500">
+          No projects in this category yet.
+        </p>
+      )}
 
       <AnimatePresence>
         {open && <Modal project={open} onClose={() => setOpenId(null)} />}

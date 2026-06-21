@@ -78,8 +78,12 @@ These are intentionally left for you to provide; the site degrades gracefully
 without them:
 
 - [x] **`/public/profile.jpg`** — headshot added.
-- [ ] **`/public/Rana_Faraz_Ahmed_CV.pdf`** — your CV. The "Download CV"
-      buttons link here (they 404 until this file is added).
+- [x] **`/public/Rana_Faraz_Ahmed_CV.pdf`** — CV added (generated from real
+      profile data via `node scripts/generate-cv.mjs`). Replace with a bespoke
+      PDF anytime — the "Download CV" buttons link to this path.
+- [ ] **PFAS paper DOI** — the "Read paper" link on the PFAS research project
+      is a TODO slot. Provide the DOI/URL in `src/data/profile.ts`
+      (`projects` → `pfas-research` → `link.url`, and remove `todo: true`).
 - [ ] *(optional)* Re-run `npm run generate:og` if you tweak hero copy so the
       social preview stays in sync.
 

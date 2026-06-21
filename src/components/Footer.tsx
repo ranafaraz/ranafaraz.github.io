@@ -13,8 +13,7 @@ export default function Footer() {
             Rana Faraz Ahmed<span className="text-cyan">.</span>
           </a>
           <p className="mt-2 max-w-sm text-sm text-slate-400">
-            Built with React, Vite, Three.js, Tailwind CSS, GSAP &amp; Framer
-            Motion. Deployed on GitHub Pages.
+            Head of AI &amp; Engineering Leader · CTO · AI/ML Architect.
           </p>
           <p className="mt-1 text-xs text-slate-400">
             © {new Date().getFullYear()} Rana Faraz Ahmed. All rights reserved.
