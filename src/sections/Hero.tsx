@@ -101,6 +101,8 @@ export default function Hero() {
             <MagneticButton
               href={site.cvPath}
               download
+              target="_blank"
+              rel="noopener"
               variant="ghost"
               cursorLabel="download"
             >

@@ -88,24 +88,81 @@ export default function Experience() {
                 />
 
                 <Reveal
-                  className={`md:col-span-1 ${
-                    right ? 'md:col-start-2' : 'md:text-right'
-                  }`}
+                  className={`md:col-span-1 ${right ? 'md:col-start-2' : ''}`}
                   y={20}
                 >
-                  <div className="glass rounded-2xl p-5 transition-colors hover:border-cyan/30">
-                    <span className="font-mono text-xs uppercase tracking-wider text-cyan">
-                      {item.period}
-                    </span>
+                  <div className="glass rounded-2xl p-5 text-left transition-colors hover:border-cyan/30">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-mono text-xs uppercase tracking-wider text-cyan">
+                        {item.period}
+                      </span>
+                      <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-400">
+                        {item.type}
+                      </span>
+                    </div>
                     <h3 className="mt-2 font-display text-lg font-semibold text-white">
                       {item.role}
                     </h3>
                     <div className="text-sm font-medium text-slate-300">
                       {item.org}
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                      {item.detail}
-                    </p>
+                    <div className="text-xs text-slate-500">{item.location}</div>
+
+                    {item.summary && (
+                      <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                        {item.summary}
+                      </p>
+                    )}
+
+                    <ul className="mt-3 space-y-1.5">
+                      {item.responsibilities.map((r, ri) => (
+                        <li
+                          key={ri}
+                          className="flex gap-2 text-sm leading-relaxed text-slate-400"
+                        >
+                          <span
+                            className="mt-1.5 h-1 w-1 flex-none rounded-full bg-cyan/70"
+                            aria-hidden
+                          />
+                          {r}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {item.achievements && (
+                      <div className="mt-4 rounded-xl border border-cyan/20 bg-cyan/5 p-3">
+                        <div className="font-mono text-[10px] uppercase tracking-wider text-cyan">
+                          Key achievements
+                        </div>
+                        <ul className="mt-1.5 space-y-1">
+                          {item.achievements.map((a, ai) => (
+                            <li
+                              key={ai}
+                              className="flex gap-2 text-sm leading-relaxed text-slate-300"
+                            >
+                              <span
+                                className="mt-1.5 h-1 w-1 flex-none rounded-full bg-cyan"
+                                aria-hidden
+                              />
+                              {a}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {item.stack && (
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {item.stack.map((s) => (
+                          <span
+                            key={s}
+                            className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-slate-300"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </Reveal>
               </li>

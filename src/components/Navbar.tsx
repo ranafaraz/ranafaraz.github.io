@@ -70,6 +70,8 @@ export default function Navbar({
           <a
             href={site.cvPath}
             download
+            target="_blank"
+            rel="noopener"
             className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex"
             data-cursor="download"
           >
@@ -116,6 +118,8 @@ export default function Navbar({
               <a
                 href={site.cvPath}
                 download
+                target="_blank"
+                rel="noopener"
                 onClick={() => setOpen(false)}
                 className="btn-primary mt-1 w-full text-sm"
               >
