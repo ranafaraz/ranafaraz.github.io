@@ -59,11 +59,19 @@ function ProjectCard({
           <span className={`font-mono text-xs ${ACCENT[project.accent]}`}>
             {String(projects.indexOf(project) + 1).padStart(2, '0')}
           </span>
-          <IconArrowRight
-            className="text-slate-500 transition-transform group-hover:translate-x-1 group-hover:text-cyan"
-            width={18}
-            height={18}
-          />
+          <span className="flex items-center gap-2">
+            {project.featured && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+                Live demo
+              </span>
+            )}
+            <IconArrowRight
+              className="text-slate-500 transition-transform group-hover:translate-x-1 group-hover:text-cyan"
+              width={18}
+              height={18}
+            />
+          </span>
         </div>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {project.categories.map((c) => (
@@ -262,6 +270,24 @@ function Modal({
               <IconArrowRight width={16} height={16} />
             </a>
           ))}
+
+        {project.links && project.links.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-3">
+            {project.links.map((l, i) => (
+              <a
+                key={l.url}
+                href={l.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${i === 0 ? 'btn-primary' : 'btn-ghost'} px-4 py-2 text-sm`}
+                data-cursor="open"
+              >
+                {l.label}
+                <IconArrowRight width={16} height={16} />
+              </a>
+            ))}
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );
@@ -284,8 +310,8 @@ export default function Projects() {
     <section id="projects" className="section scroll-mt-24">
       <SectionHeading
         eyebrow="Projects"
-        title="Selected work — AI, FinTech, Blockchain & Research"
-        subtitle="Real systems shipped across EdTech, FinTech, enterprise and peer-reviewed research. Filter by category, then click any card for the problem, approach and result."
+        title="Selected work — Open-source demos, AI, FinTech & Research"
+        subtitle="Ten open-source, offline-first AI/ML projects you can run live in the browser, plus systems shipped across EdTech, FinTech, enterprise and peer-reviewed research. Filter by category, then click any card for the problem, approach and result."
       />
 
       {/* Category filter bar */}

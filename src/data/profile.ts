@@ -138,6 +138,7 @@ export const skills: SkillNode[] = [
 
 // Filter categories for the projects catalog. 'All' is implicit in the UI.
 export const projectCategories = [
+  'Open Source',
   'AI / ML',
   'Generative AI & RAG',
   'FinTech',
@@ -160,9 +161,184 @@ export type Project = {
   accent: 'cyan' | 'indigo' | 'violet';
   // Optional external link (e.g. published paper). `todo: true` => not yet live.
   link?: { label: string; url: string; todo?: boolean };
+  // Optional set of external links (e.g. live demo + source) rendered in the modal.
+  links?: { label: string; url: string }[];
+  // Featured entries are pinned to the top of the catalog with a highlight.
+  featured?: boolean;
 };
 
+// Live, interactive demos for the 10-repo open-source AI/ML portfolio. Each is a
+// production-grade, offline-first project with green CI, a real eval gate, and a
+// browser demo (demo URL + source). These are pinned to the top of the catalog.
+const demo = (id: string) => ({ label: 'Live demo', url: `https://${id}.dexdevs.com` });
+const src = (repo: string) => ({
+  label: 'Source',
+  url: `https://github.com/ranafaraz/${repo}`,
+});
+
 export const projects: Project[] = [
+  // ── Open-source AI/ML portfolio (live demos) ────────────────────────────
+  {
+    id: 'insightrag',
+    title: 'InsightRAG — Grounded RAG with Citations',
+    categories: ['Open Source', 'Generative AI & RAG', 'AI / ML'],
+    tagline: 'Hybrid retrieval → rerank → grounded answers with citations & guardrails.',
+    problem:
+      'Production RAG must give source-grounded answers, resist prompt injection, and stay reproducible with no API keys or GPU.',
+    approach:
+      'Hybrid (BM25 + dense) retrieval → cross-encoder rerank → grounded generation with inline citations; input/output guardrails; every heavy component has a deterministic offline backend.',
+    result:
+      'recall@5 and faithfulness gated in CI (green on Python 3.10–3.12); runs fully offline by default. Live in-browser demo.',
+    stack: ['RAG', 'BM25', 'Cross-encoder', 'FastAPI', 'Guardrails', 'Python'],
+    accent: 'indigo',
+    featured: true,
+    links: [demo('insightrag'), src('InsightRAG')],
+  },
+  {
+    id: 'guardrail',
+    title: 'GuardrAIl — LLM Safety & Eval',
+    categories: ['Open Source', 'Generative AI & RAG', 'AI / ML'],
+    tagline: 'Prompt-injection, PII & toxicity guards with a red-team gate.',
+    problem:
+      'LLM apps need to block injection, redact PII, and prove their guards actually catch attacks.',
+    approach:
+      'Composable Guard/Policy with deterministic regex/lexical backends (optional Presidio/Detoxify), validated by a red-team suite measuring catch-rate and false-positive rate.',
+    result:
+      'Red-team catch-rate gated in CI; ships FERPA/COPPA/GDPR policies. Live demo.',
+    stack: ['LLM Safety', 'PII Redaction', 'Prompt Injection', 'Pydantic', 'Python'],
+    accent: 'cyan',
+    featured: true,
+    links: [demo('guardrail'), src('GuardrAIl')],
+  },
+  {
+    id: 'finsight',
+    title: 'FinSight — Sentiment Alpha & Overfitting-Aware Backtest',
+    categories: ['Open Source', 'FinTech', 'AI / ML'],
+    tagline: 'News-sentiment trading signal with Deflated Sharpe & purged CV.',
+    problem:
+      'Sentiment trading signals are trivially overfit, and a naive Sharpe ratio hides it.',
+    approach:
+      'Turns headline sentiment into a signal and backtests with Deflated Sharpe + purged walk-forward CV; offline lexical sentiment & synthetic market (FinBERT / real prices optional).',
+    result:
+      'Reports Deflated vs naive Sharpe to expose overfitting before capital is risked. Live demo.',
+    stack: ['Sentiment', 'Backtesting', 'Deflated Sharpe', 'NumPy', 'pandas'],
+    accent: 'violet',
+    featured: true,
+    links: [demo('finsight'), src('FinSight')],
+  },
+  {
+    id: 'pathwai',
+    title: 'PathwAI — LLM-Guided Planning vs A*',
+    categories: ['Open Source', 'Generative AI & RAG', 'AI / ML'],
+    tagline: 'Agentic planner benchmarked against the A* optimum.',
+    problem:
+      'Do LLM “agents” actually plan well? You need a ground-truth optimal yardstick to know.',
+    approach:
+      'An agentic planner proposes actions and verifies them with search, measured against A* optimal cost and node expansions across gridworld / blocksworld / delivery.',
+    result:
+      'Guidance + verification recovers near-optimal plans with far fewer expansions. Live demo.',
+    stack: ['Planning', 'A* Search', 'Agents', 'Verification', 'Python'],
+    accent: 'cyan',
+    featured: true,
+    links: [demo('pathwai'), src('PathwAI')],
+  },
+  {
+    id: 'documind',
+    title: 'DocuMind — Layout-Aware Document Extraction',
+    categories: ['Open Source', 'AI / ML'],
+    tagline: 'Key-information extraction where layout beats text-only.',
+    problem:
+      'On forms and invoices the value sits away from its label, so text-only extraction fails.',
+    approach:
+      'Extracts structured records and contrasts layout-aware vs text-only extraction against ground-truth records, with a validity verifier; synthetic documents with known geometry.',
+    result:
+      'Layout awareness sharply lifts field accuracy over text-only. Live demo.',
+    stack: ['Document AI', 'KIE', 'Layout', 'NumPy', 'Python'],
+    accent: 'indigo',
+    featured: true,
+    links: [demo('documind'), src('DocuMind')],
+  },
+  {
+    id: 'mlforge',
+    title: 'MLForge — Leakage-Safe Model Selection',
+    categories: ['Open Source', 'AI / ML', 'Platform & Cloud'],
+    tagline: 'Reported vs held-out oracle — the optimism each protocol leaks.',
+    problem:
+      'Preprocessing leakage and selection bias silently inflate reported tabular accuracy.',
+    approach:
+      'Runs leaky / pipelined / nested-CV protocols and contrasts the reported score with a held-out oracle; the gap is the optimism leaked by the protocol.',
+    result:
+      'Quantifies the optimism gap; nested CV tracks the oracle. Live demo.',
+    stack: ['Model Selection', 'Nested CV', 'Data Leakage', 'NumPy'],
+    accent: 'violet',
+    featured: true,
+    links: [demo('mlforge'), src('MLForge')],
+  },
+  {
+    id: 'tuneforge',
+    title: 'TuneForge — Black-Box HPO Benchmark',
+    categories: ['Open Source', 'AI / ML'],
+    tagline: 'Random / TPE / GP-EI / Hyperband vs known optima.',
+    problem:
+      'Hyperparameter-optimization methods are hard to compare fairly, and gains can be illusory.',
+    approach:
+      'Benchmarks random, TPE, GP-EI, successive-halving and Hyperband on surfaces with known optima (including a structure-free null) measuring simple regret.',
+    result:
+      'Isolates genuine model-based and multi-fidelity gains from noise. Live demo.',
+    stack: ['HPO', 'Bayesian Opt', 'Hyperband', 'NumPy'],
+    accent: 'cyan',
+    featured: true,
+    links: [demo('tuneforge'), src('TuneForge')],
+  },
+  {
+    id: 'neurotrace',
+    title: 'NeuroTrace — Causal-Tracing Interpretability',
+    categories: ['Open Source', 'AI / ML', 'Research'],
+    tagline: 'Which attribution methods are causal vs fooled by confounds?',
+    problem:
+      'Attribution methods can look right while being fooled by planted non-causal decoys.',
+    approach:
+      'Scores correlation, gradient, integrated-gradients and activation-patching by AUROC against a known ground-truth circuit (confounded / suppressor variants).',
+    result:
+      'Causal methods (patching, IG) survive confounds where proxies collapse. Live demo.',
+    stack: ['Interpretability', 'Attribution', 'AUROC', 'NumPy'],
+    accent: 'indigo',
+    featured: true,
+    links: [demo('neurotrace'), src('NeuroTrace')],
+  },
+  {
+    id: 'voxtutor',
+    title: 'VoxTutor — Pronunciation Assessment',
+    categories: ['Open Source', 'AI / ML'],
+    tagline: 'Mispronunciation detection: which scoring ingredients are robust?',
+    problem:
+      'Pronunciation scorers degrade under timing warp and channel noise — but which ingredient matters?',
+    approach:
+      'Scores naive / DTW-aligned / normalized / GOP methods by AUROC against known mispronunciations across clean / warped / noisy regimes.',
+    result:
+      'Forced alignment and GOP normalization each win under their stressor. Live demo.',
+    stack: ['Speech', 'GOP', 'DTW', 'AUROC', 'NumPy'],
+    accent: 'violet',
+    featured: true,
+    links: [demo('voxtutor'), src('VoxTutor')],
+  },
+  {
+    id: 'ensemblekit',
+    title: 'EnsembleKit — Ensemble-Combiner Benchmark',
+    categories: ['Open Source', 'AI / ML'],
+    tagline: 'When do weighting and robust aggregation actually help?',
+    problem:
+      'It is unclear which ensemble ingredient survives which failure mode — dead learners vs corruption.',
+    approach:
+      'Compares average / competence-weighted / robust-median / full combiners by AUROC against a known Bayes label across homogeneous / heterogeneous / corrupted regimes.',
+    result:
+      'The weighted-median “full” combiner is robust to both dead learners and per-sample corruption. Live demo.',
+    stack: ['Ensembles', 'Weighting', 'Robust Stats', 'NumPy'],
+    accent: 'cyan',
+    featured: true,
+    links: [demo('ensemblekit'), src('EnsembleKit')],
+  },
+
   // ── AI / ML & Generative AI ─────────────────────────────────────────────
   {
     id: 'life-hub',
