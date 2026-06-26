@@ -48,6 +48,14 @@
     />
     <meta name="twitter:image" content="https://ranafaraz.github.io/og-image.png" />
 
+    <!-- GitHub Pages SPA: restore path stashed by 404.html -->
+    <script>
+      (function () {
+        var r = sessionStorage.getItem('__spa_redirect');
+        if (r) { sessionStorage.removeItem('__spa_redirect'); history.replaceState(null, '', r); }
+      })();
+    </script>
+
     <!-- Fonts: preconnect + display swap for fast paint -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

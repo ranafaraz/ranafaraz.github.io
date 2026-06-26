@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rana Faraz Ahmed</title>
+    <script>
+      // GitHub Pages SPA redirect: store the intended path and navigate to root.
+      // The app's index.html reads this value and restores the path via history API
+      // before React mounts, so the router receives the correct URL.
+      sessionStorage.setItem('__spa_redirect', location.pathname + location.search + location.hash);
+      location.replace('/');
+    </script>
+  </head>
+  <body></body>
+</html>
