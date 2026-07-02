@@ -1,4 +1,4 @@
-import { credentials, publications } from '../data/profile';
+import { certifications, credentials, publications } from '../data/profile';
 import SectionHeading from '../components/SectionHeading';
 import Reveal from '../components/Reveal';
 import RocCurve from '../components/RocCurve';
@@ -9,7 +9,7 @@ export default function Research() {
       <SectionHeading
         eyebrow="Research & Credentials"
         title="Published, certified, and legally literate"
-        subtitle="Peer-reviewed research alongside a PhD, MPhil, LLB and PMP — engineering depth backed by academic rigor and governance."
+        subtitle="Peer-reviewed research alongside a PhD, MPhil, an LLB with bar enrolment (enrolled advocate), and PMP — engineering depth backed by academic rigor, applied-AI certifications, and governance."
       />
 
       <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
@@ -53,6 +53,25 @@ export default function Research() {
                   </p>
                 </div>
               ))}
+            </div>
+          </Reveal>
+
+          {/* Certifications chip strip */}
+          <Reveal delay={0.14}>
+            <div className="glass rounded-2xl p-5">
+              <div className="font-mono text-xs uppercase tracking-wider text-cyan">
+                Certifications
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {certifications.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>

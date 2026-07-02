@@ -17,12 +17,15 @@ export const site = {
 export const identity = {
   name: 'Rana Faraz Ahmed',
   // Animated rotator in the hero
-  roles: ['AI/ML Architect', 'RAG Engineer', 'Engineering Leader', 'CTO'],
-  title: 'Head of AI & Engineering Leader · CTO · AI/ML Architect',
+  roles: ['AI/ML Architect', 'RAG Engineer', 'VP of Engineering', 'CTO'],
+  title: 'CTO · VP of Engineering · AI/ML Architect',
   oneLiner:
     'I build and lead the AI that ships — RAG assistants, recommender systems, and NLP/deep-learning personalization — on cloud-native, compliant infrastructure.',
   experienceYears: '11+',
-  location: 'Remote',
+  // Remote-credibility beat: proven cross-timezone delivery for a US company.
+  location: 'Pakistan (UTC+5)',
+  availability:
+    'Remote-first · daily overlap with US ET (mornings) & full EU business hours',
   email: 'ranafarazahmed@gmail.com',
   linkedin: 'https://www.linkedin.com/in/ranafarazahmed/',
   github: 'https://github.com/ranafaraz',
@@ -32,8 +35,9 @@ export const about = {
   // The differentiation hook.
   lead: 'A rare combination of hands-on AI/ML engineering, PMP-grade delivery leadership, and tech-law literacy.',
   body: [
-    'I’m an AI and engineering leader with 11+ years building and shipping production systems. Today I’m CTO, VP of Engineering & AI/ML Architect at Electus Global Education Co., where I lead engineering and AI for Life Hub / Life Hub Infiniti AI — an adaptive AI EdTech + FinTech platform spanning personalized learning, career intelligence, micro-earning, and blockchain credentials.',
-    'What makes me different is the intersection: I’m hands-on with AI/ML engineering, I run delivery at PMP grade, and I read the law (LLB, cyber/IP focus). The result is AI that is not only capable, but also defensible on data privacy, IP, and governance.',
+    'I’m an engineer-to-executive with 11+ years shipping production systems. Today I’m CTO, VP of Engineering & AI/ML Architect at Electus Global Education Co. (Florida, US), where I set engineering and AI strategy for Life Hub / Life Hub Infiniti AI — an adaptive AI EdTech + FinTech platform — governing a globally distributed team of 25 engineers, fully remote from Pakistan.',
+    'Before and alongside that, I digitised a 100,000-user public university end-to-end — deploying and customising ERP, building a private cloud, and leading a 50+ member technical team as the senior-most technical authority (a Head-of-IT / CTO-level remit). I’ve carried a 12 Billion PKR budget through committee and, as an Inspection-Committee Secretary for ~3 years, scrutinised billions in procurement.',
+    'What makes me different is the intersection: I’m hands-on with AI/ML engineering, I run delivery at PMP grade, and I read the law — an LLB in cyber/IP and an enrolled advocate. The result is AI that is not only capable, but defensible on data privacy, IP, and governance (FERPA/COPPA/GDPR).',
   ],
   // Three pillars rendered as differentiator cards.
   pillars: [
@@ -59,8 +63,8 @@ export type Stat = { value: number; suffix: string; label: string };
 
 export const stats: Stat[] = [
   { value: 11, suffix: '+', label: 'Years of experience' },
-  { value: 500, suffix: '+', label: 'People led on a program' },
-  { value: 2, suffix: '', label: 'Peer-reviewed publications' },
+  { value: 100, suffix: 'K+', label: 'Daily users served (IUB, 5 campuses)' },
+  { value: 50, suffix: '+', label: 'Engineers & IT team led' },
   { value: 957, suffix: '', label: 'ROC-AUC ×1000 (0.957)' },
 ];
 
@@ -106,9 +110,11 @@ export const skills: SkillNode[] = [
   { id: 'dl', label: 'Deep Learning', cluster: 'ai' },
   { id: 'mlops', label: 'MLOps', cluster: 'ai' },
   { id: 'agents', label: 'AI Agents', cluster: 'ai' },
+  { id: 'finetune', label: 'LLM Fine-tuning', cluster: 'ai' },
   { id: 'pytorch', label: 'PyTorch', cluster: 'ai' },
   { id: 'tensorflow', label: 'TensorFlow', cluster: 'ai' },
   { id: 'langchain', label: 'LangChain', cluster: 'ai' },
+  { id: 'vertex', label: 'Vertex AI', cluster: 'ai' },
   { id: 'openai', label: 'OpenAI API', cluster: 'ai' },
   // Cloud & Platform
   { id: 'aws', label: 'AWS', cluster: 'cloud' },
@@ -127,12 +133,14 @@ export const skills: SkillNode[] = [
   { id: 'laravel', label: 'PHP/Laravel', cluster: 'engineering' },
   { id: 'django', label: 'Django', cluster: 'engineering' },
   { id: 'rest', label: 'REST APIs', cluster: 'engineering' },
+  { id: 'erp', label: 'iDempiere / ERP', cluster: 'engineering' },
   { id: 'bigquery', label: 'BigQuery', cluster: 'engineering' },
   { id: 'sql', label: 'SQL & NoSQL', cluster: 'engineering' },
   // Leadership & Governance
   { id: 'techlead', label: 'Technical Leadership', cluster: 'leadership' },
   { id: 'aigov', label: 'AI Governance', cluster: 'leadership' },
   { id: 'pmp', label: 'Program Mgmt (PMP)', cluster: 'leadership' },
+  { id: 'procgov', label: 'Procurement Governance', cluster: 'leadership' },
   { id: 'privacy', label: 'Data Privacy & Compliance', cluster: 'leadership' },
 ];
 
@@ -595,33 +603,31 @@ export const timeline: TimelineItem[] = [
     period: 'Feb 2025 – Present',
     location: 'Remote · Florida, US',
     summary:
-      'Lead engineering and AI for Life Hub (an “Earn & Learn” EdTech/FinTech platform) and architect Life Hub Infiniti AI — an adaptive AI ecosystem that personalizes learning, optimizes career pathways, and bridges education with financial empowerment.',
+      'Set engineering and AI strategy and laid the technical foundation for Life Hub — a “learn-and-earn” EdTech/FinTech super-app for kids 6–18 (featured in Forbes & NASDAQ) — and architect Life Hub Infiniti AI. Govern a globally distributed team of 25 engineers.',
     responsibilities: [
-      'Define and own technology strategy, system architecture, and the engineering organization; lead teams building secure, high-performance, scalable platforms.',
-      'Architect AI/ML personalization — NLP, deep learning, recommender systems, and RAG-based chatbots that match learner skills to career goals.',
-      'Build “edu-jobs & rewards”: AI-powered micro-tasking that lets learners earn while they learn, with gamified financial-literacy and career-readiness experiences.',
-      'Own cloud and cybersecurity: high-availability infrastructure on AWS, GCP, Kubernetes, and serverless; compliance with FERPA, COPPA, and GDPR.',
-      'Design blockchain-based digital credentials — verifiable badges and micro-certifications.',
+      'Own technology strategy, system architecture, and the engineering organisation; govern and supervise a globally distributed team of 25 engineers.',
+      'Architect AI/ML personalisation — NLP, deep learning, recommender systems, and RAG assistants that match learner skills to career goals.',
+      'Stand up the MLOps lifecycle (experiment tracking, model CI/CD, GKE serving, drift/performance monitoring); hands-on with ML and LLM fine-tuning.',
+      'Embed responsible-AI guardrails (prompt-injection / PII / toxicity) and FERPA/COPPA/GDPR controls into every AI feature from day one.',
     ],
     achievements: [
-      'Shipped an AI-powered financial-literacy and career-readiness platform with gamification.',
-      'Architected corporate-sponsored learning programs and micro-internships.',
-      'Built automated career-mapping tools for students entering high-growth fields.',
+      'Re-architected Life Hub from the ground up — replaced a ~70,000-LOC CodeIgniter 3 + Angular 17 monolith with microservices, rebuilt as Django + Next.js PWA, and shipped the Flutter iOS & Android apps (live on the App Store and Google Play).',
+      'Led the full AWS→GCP cloud migration — secured $200,000 in Google Cloud credits and rebuilt the entire production infrastructure from scratch.',
+      'Built Infiniti AI / “Fini”, a production RAG assistant for children under 18 on GCP Vertex AI, with COPPA-aligned safety and guardrails.',
+      'Designed agentic AI pipelines for automated code, security, and governance audits — materially cutting audit cost and cycle time.',
     ],
     stack: [
-      'NLP',
-      'Deep Learning',
+      'RAG',
+      'Vertex AI',
+      'LLM Fine-tuning',
       'Recommender Systems',
-      'RAG Chatbots',
-      'AWS',
+      'MLOps',
       'GCP',
-      'Kubernetes',
-      'Serverless',
+      'Kubernetes (GKE)',
+      'Django',
+      'Next.js',
       'Flutter',
-      'React',
-      'Angular',
       'Python',
-      'PHP',
     ],
     current: true,
   },
@@ -639,66 +645,70 @@ export const timeline: TimelineItem[] = [
     ],
   },
   {
-    role: 'Member, PMO Steering Committee',
+    role: 'Senior Technical Lead — Enterprise Systems, ERP & IT Infrastructure',
     org: 'The Islamia University of Bahawalpur',
-    type: 'Part-time',
-    period: 'Jan 2025 – Present',
-    location: 'Hybrid · Rahim Yar Khan, Pakistan',
+    type: 'Full-time',
+    period: 'Jun 2020 – Present',
+    location: 'Bahawalpur / Rahim Yar Khan, Pakistan',
+    summary:
+      'Head-of-IT / CTO-level functional scope for one of Pakistan’s largest public universities. Substantive grade: Senior Programmer (BPS-18); currently In-Charge, Directorate of IT (Rahim Yar Khan Campus). Led a 50+ member technical team serving ~100,000 daily users across 5 campuses and ~350 departments.',
     responsibilities: [
-      'Provide strategic direction and high-level governance for the project portfolio, ensuring alignment with organizational goals.',
-      'Review and approve project charters, business cases, and change requests based on strategic impact, business value, and risk.',
-      'Identify and mitigate critical program-level risks escalated by project teams; enforce governance best practices through performance monitoring.',
-      'Advocate for initiatives across senior leadership, secure buy-in, resolve competing priorities, and report performance and outcomes to top leadership.',
+      'Senior-most technical authority: led a 50+ member team (developers, testers, IT support) and ran full-lifecycle delivery across a portfolio of enterprise systems.',
+      'Built and ran the university’s internal private cloud and virtualised infrastructure — provisioning, deployment, uptime, and security for institution-wide applications.',
+      'Member of the University Budget Committee (annual 12 Billion PKR budget) and co-opted member of the Finance & Planning Committee — presented and defended the budget and secured approval.',
+    ],
+    achievements: [
+      'Deployed and customised iDempiere ERP (Java/OSGi) by hand — procure-to-pay, financial accounting, inventory, workflow and JasperReports — digitising the entire Finance Office and replacing paper-based processes.',
+      'Digitised financial operations for a 12 Billion PKR budget with role-based access and full audit trails, cutting budgeting/consolidation cycle time ~50%.',
+      'Delivered payroll & taxation for ~6,000 employees integrated with biometric + facial-recognition attendance; built blockchain-enabled degree attestation for tamper-evident verification.',
+      'Trained ~2,000 staff to adopt custom in-house systems; trained and deployed ML models for multi-campus budget forecasting.',
+    ],
+    stack: [
+      'iDempiere ERP',
+      'Java/OSGi',
+      'PostgreSQL',
+      'Docker',
+      'Private Cloud',
+      'PHP',
+      'JavaScript',
+      'Machine Learning',
     ],
     current: true,
   },
   {
-    role: 'Senior Project Manager',
+    role: 'Secretary, Inspection Committee (over Purchase Committee)',
     org: 'The Islamia University of Bahawalpur',
-    type: 'Full-time',
-    period: 'Dec 2021 – Jan 2025',
-    location: 'Hybrid · Bahawalpur, Pakistan',
+    type: 'Additional charge · concurrent',
+    period: '~2022 – 2025 · ~3 years',
+    location: 'Bahawalpur, Pakistan',
+    summary:
+      'Public-sector procurement governance — the “engineer who governs what he builds”.',
     responsibilities: [
-      'Managed HR, network, software, and cloud infrastructure supporting ~100,000 daily active users across 5 distributed sub-campuses.',
-      'Supervised a 50+ person team of back-end/front-end developers, testers, and IT support staff; trained 1,000+ end users across departments.',
-      'Aligned technical development and IT projects with overall organizational plans and goals.',
-    ],
-    achievements: [
-      'Delivered a 50M PKR CMS deployment at 15% under budget and two weeks ahead of schedule.',
-      'Delivered a budget-management program governing a 12 Billion PKR organizational budget.',
+      'Inspected public-sector procurements worth billions of PKR, combining technical, financial-audit, and procurement-law judgment to ensure compliance and value-for-money.',
+      'Conducted critical audits of university financials — surfacing discrepancies and strengthening financial controls.',
     ],
   },
   {
-    role: 'Additional Director (BPS-19)',
+    role: 'Member, PMO Steering Committee',
     org: 'The Islamia University of Bahawalpur',
-    type: 'Part-time',
-    period: 'Mar 2024 – Sep 2024',
-    location: 'Hybrid',
+    type: 'Additional charge · concurrent',
+    period: 'Jan 2025 – Present',
+    location: 'Rahim Yar Khan, Pakistan',
     responsibilities: [
-      'Partnered with the Director to establish and expand a franchise network of schools and colleges for the university.',
-      'Led initiatives to widen educational access in Bahawalpur District; promoted academic excellence and community engagement.',
+      'Provide strategic direction and high-level governance for the project portfolio, ensuring alignment with organisational goals.',
+      'Review and approve project charters, business cases, and change requests on strategic impact, business value, and risk; report outcomes to top leadership.',
     ],
+    current: true,
   },
   {
-    role: 'Deputy Director (BPS-18)',
+    role: 'Additional Director (BPS-19) · Deputy Director (BPS-18)',
     org: 'The Islamia University of Bahawalpur',
-    type: 'Part-time',
-    period: 'Dec 2022 – Mar 2024',
-    location: 'On-site',
+    type: 'Additional charge · concurrent',
+    period: 'Dec 2022 – Sep 2024',
+    location: 'Bahawalpur, Pakistan',
     responsibilities: [
-      'Oversaw all IT, procurement, and administrative matters at the Islamia University School System, reporting to the Director.',
-      'Implemented initiatives to streamline operations; led cross-functional teams to deliver projects and organizational goals.',
-    ],
-  },
-  {
-    role: 'Programmer (BPS-17)',
-    org: 'The Islamia University of Bahawalpur',
-    type: 'Contract',
-    period: 'Jun 2020 – Nov 2021',
-    location: 'On-site',
-    responsibilities: [
-      'Led development of custom applications in PHP and JavaScript.',
-      'Built an ERP solution for the university; deployed iDempiere ERP to automate procurement processes.',
+      'Held successive additional charges (Deputy Director → Additional Director) over IT, procurement, and administration for the university school system, reporting to the Director.',
+      'Streamlined operations and led cross-functional teams to widen educational access and deliver organisational goals.',
     ],
   },
   {
@@ -776,11 +786,26 @@ export const credentials: Credential[] = [
     title: 'LLB (Law)',
     detail: 'Cyber, IP & Copyright law focus',
   },
+  {
+    title: 'Enrolled Advocate',
+    detail: 'Punjab Bar Council · High Court Bar Assoc. Bahawalpur (Life Member)',
+  },
   { title: 'BS Computer Science', detail: 'Foundations in CS' },
   {
-    title: 'PMP Certified',
-    detail: 'Project Management Institute (PMI)',
+    title: 'PMP® Certified',
+    detail: 'Project Management Institute · 2025–2028',
   },
+];
+
+// Applied AI, cloud & delivery certifications (shown as a compact chip strip).
+export const certifications: string[] = [
+  'PMP® — Project Management Professional (PMI)',
+  'OpenAI Realtime API — Front-End Voice Apps (WebRTC)',
+  'AI Agents for Product Leaders',
+  'Personalized Chatbot with OpenAI & LangChain',
+  'Deep Learning: Model Optimization & Tuning',
+  'Google Cloud Foundations',
+  'Building RESTful Web APIs with Django',
 ];
 
 // Tech marquee — only tech actually used.
@@ -788,7 +813,9 @@ export const techMarquee: string[] = [
   'PyTorch',
   'TensorFlow',
   'LangChain',
+  'Vertex AI',
   'OpenAI',
+  'FastAPI',
   'AWS',
   'GCP',
   'Kubernetes',
@@ -796,10 +823,10 @@ export const techMarquee: string[] = [
   'Python',
   'Node.js',
   'React',
-  'Angular',
+  'Next.js',
   'Flutter',
   'Django',
-  'Laravel',
+  'iDempiere',
   'BigQuery',
 ];
 
