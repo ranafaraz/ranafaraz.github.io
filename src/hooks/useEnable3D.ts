@@ -1,32 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useReducedMotion } from './useReducedMotion';
+import { useQualityTier } from './useQualityTier';
 
 /**
- * Decides whether to mount heavy WebGL. Disabled under reduced-motion or on
- * clearly low-power devices (few cores / tiny memory) so we never ship a janky
- * hero. Returns { enabled, count } where count scales particles to the screen.
+ * Backward-compatible thin wrapper over {@link useQualityTier}. Existing callers
+ * expect `{ enabled, count }`; the richer tier settings now drive the global 3D
+ * experience. `enabled` is false only when the tier is `off` (reduced-motion or
+ * genuinely low-power hardware).
  */
 export function useEnable3D() {
-  const reduced = useReducedMotion();
-  const [enabled, setEnabled] = useState(false);
-  const [count, setCount] = useState(120);
-
-  useEffect(() => {
-    if (reduced) {
-      setEnabled(false);
-      return;
-    }
-    const cores = navigator.hardwareConcurrency ?? 4;
-    const mem = (navigator as unknown as { deviceMemory?: number }).deviceMemory ?? 4;
-    const small = window.matchMedia('(max-width: 768px)').matches;
-
-    if (cores <= 2 || mem <= 1) {
-      setEnabled(false);
-      return;
-    }
-    setEnabled(true);
-    setCount(small ? 70 : 120);
-  }, [reduced]);
-
-  return { enabled, count };
+  const { tier, particles } = useQualityTier();
+  return { enabled: tier !== 'off', count: particles || 120 };
 }

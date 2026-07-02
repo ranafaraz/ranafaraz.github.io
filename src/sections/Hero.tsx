@@ -1,20 +1,24 @@
-import { Suspense, lazy } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { identity, site } from '../data/profile';
-import { useEnable3D } from '../hooks/useEnable3D';
 import RoleRotator from '../components/RoleRotator';
 import MagneticButton from '../components/MagneticButton';
 import { IconArrowRight, IconDownload, IconGitHub, IconLinkedIn } from '../components/Icons';
 
-// Lazy so the WebGL bundle never blocks first paint.
-const SceneCanvas = lazy(() => import('../components/three/SceneCanvas'));
-const NeuralField = lazy(() => import('../components/three/NeuralField'));
-
 export default function Hero() {
-  const { enabled, count } = useEnable3D();
+  const ref = useRef<HTMLElement>(null);
+  // Lift + fade the hero content as it scrolls away (synced with the camera
+  // pulling back from the AI core in the global 3D scene).
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section
+      ref={ref}
       id="home"
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
@@ -29,24 +33,17 @@ export default function Hero() {
         className="absolute inset-0 -z-10 bg-grid bg-[size:44px_44px] opacity-[0.35] [mask-image:radial-gradient(70%_60%_at_50%_40%,#000,transparent)]"
       />
 
-      {/* 3D neural field (or static fallback) */}
-      <div className="absolute inset-0 -z-10">
-        {enabled ? (
-          <Suspense fallback={null}>
-            <SceneCanvas className="h-full w-full">
-              <ambientLight intensity={0.6} />
-              <NeuralField count={count} />
-            </SceneCanvas>
-          </Suspense>
-        ) : (
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-[radial-gradient(40%_40%_at_70%_50%,rgba(34,211,238,0.12),transparent_60%)]"
-          />
-        )}
-      </div>
+      {/* The 3D neural core/field lives in the global <ExperienceCanvas> behind
+          the whole page; the hero just needs a soft focal glow over it. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(38%_38%_at_50%_45%,rgba(34,211,238,0.10),transparent_60%)]"
+      />
 
-      <div className="container-x relative grid items-center gap-12 pt-28 md:grid-cols-[1.4fr_1fr] md:pt-0">
+      <motion.div
+        style={{ y, opacity }}
+        className="container-x relative grid items-center gap-12 pt-28 md:grid-cols-[1.4fr_1fr] md:pt-0"
+      >
         <div>
           <motion.span
             initial={{ opacity: 0, y: 14 }}
@@ -169,7 +166,7 @@ export default function Hero() {
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
       <div className="absolute inset-x-0 bottom-6 flex justify-center">

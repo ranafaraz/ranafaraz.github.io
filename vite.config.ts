@@ -25,7 +25,8 @@ export default defineConfig({
         manualChunks: {
           three: ['three'],
           r3f: ['@react-three/fiber', '@react-three/drei'],
-          motion: ['framer-motion', 'gsap'],
+          postfx: ['@react-three/postprocessing', 'postprocessing'],
+          motion: ['framer-motion', 'gsap', 'lenis'],
         },
       },
     },
